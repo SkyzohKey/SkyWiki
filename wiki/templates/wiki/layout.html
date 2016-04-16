@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ wiki.title }} - {{ page.title }}</title>
+    <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+
+    <!-- TODO:
+      * Add some meta tags to have an accurate SEO.
+      * Add a viewport meta tag for reponsive layout.
+    -->
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <a href="{% url 'homepage' %}">{{ wiki.title }}</a>
+      </div>
+
+      <nav id="menu">
+        <span class="left">
+          <ul>
+            <li><a class="active" href="{% url 'homepage' %}">home</a></li>
+            <li><a href="#">about</a></li>
+            <li><a href="#">faq</a></li>
+            <li><a href="#">binaries</a></li>
+            <li><a href="#">clients</a></li>
+            <li><a href="#">guides</a></li>
+            <li><a href="#">troubleshooting</a></li>
+            <li><a href="#">contributing</a></li>
+            <li><a href="#">community</a></li>
+            <li><a href="#">nodes</a></li>
+          </ul>
+        </span>
+        <span class="right">
+          <ul>
+            {% if page.author != None %}
+            <li class="small"><b>{{ page.author }}</b> authored</li>
+            {% endif %}
+            {% if page.date != None %}
+            {% load timetags %}
+            <li class="small">at <i>{{ page.date | unixtime }}</i> the <i>{{ page.date | unixdate }}</i></li>
+            {% endif %}
+            <li><a href="#edit">Edit this page</a></li>
+          </ul>
+        </span>
+      </nav>
+
+      <section id="content">
+        <nav id="toc">
+        {{ article.toc | safe }}
+        </nav>
+        <article id="article">
+          {% if article.isOutdated %}
+          <div class="warning">
+            This article is {{ article.isOutdated }} old. Please keep this in
+            mind during your reading.
+          </div>
+          {% endif %}
+
+          {{ article.content | safe }}
+        </article>
+      </section>
+
+      <footer id="footer">
+        <span class="right">
+          &copy; 2016 {{ wiki.title }} -
+          <a href="{{ wiki.github }}">
+            Source code for this on GitHub!
+          </a>
+        </span>
+      </footer>
+    </div>
+  </body>
+</html>
