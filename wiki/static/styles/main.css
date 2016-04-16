@@ -228,11 +228,8 @@ dt:last-child {
 	max-width: 50em;
 }
 
-#article:first-child {
-	margin-top: 0 !important;
-}
-#article:last-child {
-	margin-bottom: 0 !important;
+#article p {
+	text-align: justify;
 }
 
 #footer {
