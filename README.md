@@ -1,4 +1,6 @@
 # SkyWiki
+![TravisCI](https://api.travis-ci.org/SkyzohKey/SkyWiki.svg)
+
 SkyWiki is a simple flat-page wiki based on Django. Pages are written in Markdown
 and then compiled in HTML via Python. This permit to finally enjoy writting wiki
 pages like never before.
